@@ -30,6 +30,8 @@ setup
 update
 var
 vendor
-/app/*
-!/app/.htaccess
-!/app/code/*
+app/*
+!app/code
+!app/code/*
+!app/design
+!app/design/*
