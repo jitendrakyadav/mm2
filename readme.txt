@@ -15,4 +15,4 @@ xyz/*
 
 It wouldn't work because the intermediary abc folder would not exist to Git, so test.xml could not find a place in which to exist.
 
-To have a better understanding, please look/observe .gitignore file in master branch of current repository.
+To have a better understanding, please look/observe .gitignore file.
