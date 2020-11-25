@@ -1,378 +1,116 @@
-/** What is Magento **/
-Magento is an open-source e-commerce platform written in PHP.
+Install Magento 2.2.6 without sample data:
+   1. "git clone" of this repository
+   2. Go to master branch at your local
+   3. Delete .git directory to remove other branches files/folders as you want to create a new/fresh Magento 
+      project (Later you might use command "git init" to use your project as fresh/new git repository) otherwise 
+      continue with current .git directory.
+   4. Go to your project/repository root directory
+   5. As here no vendor directory present, use command "composer install" to install/download all packages of 
+      Magento & other-vendors as well.
+   6. In between, control asks you about https://repo.magento.com/ credentials i.e. username/password so use here 
+      Public-Key/Private-Key instead of username/password. To get your Public Key & Private Key, please follow 
+      below steps:
+         a. Go to https://developer.magento.com/ and register yourself there.
+	 b. After logined into your account, click on your username in header > My Account > Developer Portal 
+	    > My Products > My Access Keys > Magento 2 > Public Key & Private Key would be displayed here, if not, 
+	    click on button "Create A New Access Key".
+   7. Install Magento by using following command:
+         php bin/magento setup:install --backend-frontname=admin --db-host=localhost --db-name=magento_7121tt --db-user=root --base-url=http://mg226tt.local.com --admin-user=admin --admin-password=admin@123 --admin-email=goto.jitendra@gmail.com --admin-firstname=Jitendra --admin-lastname=Yadav --language=en_US --timezone=Asia/Kolkata --currency=INR --use-rewrites=1
+      Note: 
+         1. By firing command "php bin/magento setup:install", you can know all suggested options by Magento, 
+	    needed to install. Use "--db-password" option as well only if you have some password for your database. 
+	    I haven't used this options here as I have no/blank/null password against my db username "root".
+	 2. This command line installation does not use Apache i.e. webserver(as I have installed magento in my 
+	    window-machine using the above command after stopping Apache) so memory-consumption would be 
+	    lesser(as instead of Apache, PHP & MySQL only PHP & MySQL are involved) and installation would 
+	    complete earlier. This means, CLI installation uses only PHP and MySQL.
+         3. It's done. After installation, it might be possible:
+	       A. your web-pages are un-accessible 
+	       B. web-page's css not working properly then use commands(only b & c; a in special situations like 
+	          you are unable to update/write any project's file or unable to set permissions/modes for your 
+		  project's folders/files with your username):
+   		     a. sudo chown -R your-user-name:your-group-name project-directory-name
+   	             b. chmod -R 777 var pub generated
+   	             c. php bin/magento setup:static-content:deploy -f
+/* ---------------------------------------------------------------------------------------------------------------------- */
+How I made ready this mg226 repository:
+   1. Download Magento 2.2.6 (zip with no sample-data) from "https://magento.com/tech-resources/download".
+   2. Create a blank-directory mg226 and unzip downloaded zip file into this directory mg226.
+   3. Modify .gitignore file: 
+         a. add one more line (as from https://github.com/magento/magento2/blob/2.2.6/.gitignore : It's Magento 
+	    with Tag: 2.2.6 github release):
+    	       /app/etc/config.php
+	 b. remove one line:
+	       /.gitattributes
+   4. Create .gitattributes file (Dealing with line endings):
+         a. Every time you press return(i.e Enter button) on your keyboard you're actually inserting an invisible 
+	    character called a line ending. Historically, different operating systems have handled line endings differently.
+	 b. For Linux & Mac: this invisible character is LF(Line Feed), for Windows: this invisible character is 
+	    a combination of two characters i.e. CR(Carriage Return) & LF(Line Feed) means CRLF.
+	 c. When you view changes in a file, Git handles line endings in its own way. Since you're collaborating 
+	    on projects with Git and GitHub, Git might produce unexpected results if, for example, you're working 
+	    on a Windows machine, and your collaborator has made a change in Linux.
+	 d. Global settings for line endings:
+	       The "git config core.autocrlf" command is used to change how Git handles line endings. It takes a 
+	       single argument.
+	       On Linux, you simply pass "input" to the configuration. 
+	       For example: "git config --global core.autocrlf input"
+	       
+	       On Windows, you pass "true" to the configuration.
+	       For example: "git config --global core.autocrlf true"
+	       
+	       That means if a file from git repository reaches in windows environment, all LF are converted to 
+	       CRLF in that file, that's why "git status" would show it as modified file without any change, even 
+	       of a single line.
+	 e. Per-repository settings:
+	       Optionally, you can configure the way Git manages line endings on a per-repository basis by 
+	       configuring a special .gitattributes file. This file is committed into the repository and overrides 
+	       an individual's core.autocrlf setting, ensuring consistent behavior for all users, regardless of 
+	       their Git settings. The advantage of a .gitattributes file is that your line configurations are 
+	       associated with your repository. You don't need to worry about whether or not collaborators have 
+	       the same line ending settings that you do.
+	 f. For more detaile, look here: https://help.github.com/articles/dealing-with-line-endings/ or 
+	    articles_dealing-with-line-endings.png in root-directory.
+   5. Remove all files/folders from/inside vendor directory except .htaccess
+      or
+      Backup vendor/.htaccess, remove whole vendor directory, create again vendor directory and move here your 
+      backed-up .htaccess file
+   6. create/add file readme.txt with content as here.
+   7. ceate a repository on github with name "mg226".
+   8. When you are in your local project's root directory, fire command "git init".
+   9. Fire command "git remote add origin https://github.com/<your-user-name>/mg226.git"
+   10.Fire command "git add .".
+   11.Fire command 'git commit -m "First commit"'
+   12.Fire command "git push origin master"
+   13.It's done.
+/* ---------------------------------------------------------------------------------------------------------------------- */
+Install Magento 2.2.6 with sample data: 
+   Installation process for Magento 2.2.6 with sample data is almost same as for without sample data.
+   Even exactly same name & number of files & folders in root directory.
+   Then what difference between the 2 zip downloaded, as zip-with-sample-data is 150MB heavier then 
+   zip-without-sample data:
+      a. composer.json (and of course composer.lock) file content is different in with-sample-data and 
+         without-sample-data versions of Magento download. As in with-sample-data, composer.json has various 
+	 sample-data module/plugin/package as their dependency.
+      b. In with-sample-data, pub/media directory contains media files, might be sample-product images, etc.
+      c. After installation, with-sample-data DB would be obviously heavier than the without-sample-data DB as 
+         it contains many sample records in it's various tables.
 
-Magento provides it's 3 versions:
-1. Magento Open Source: It is an open-source eCommerce platform and previously named as Magento Community Edition. Developers can implement the core files and extend its functionality by adding new plug-in modules provided by other developers.
-2. Magento Commerce: It's an eCommerce platform as a service i.e. it provides hosting(i.e. space where application's code reside) on it's own as well.
-3. Magento Commerce (On-Premises): It's previously named as "Magento Enterprise Edition". It's originated from Magento Open Source and has the same core files. Unlike Open Source, this is not free but has more features and functionality. This product is designed for large businesses that require technical support with installation, usage, configuration, and troubleshooting. Here Magento only provides Enterprise Edition code and website owner put it at their own purchased hosting like AWS or Google cloud.
-
-Magento serves to three levels of businesses; small business, mid-market, and enterprise. Although Magento Commerce has annual maintenance fees, neither Open Source nor Commerce(On-Premises) include hosting.
-
-/** 
- * When you are inside a controller action page like app/code/Ajindra/BookAppointment/Controller/Index/Index.php under execute() method, you can do followings: 
- * As we know, here, Magento treats directory "Index" as controller and the actual file "Index.php" as action. 
- * URL to access this controller: http://www.xyx.com/<frontname>/index/index or http://www.xyz.com/<frontname>
- * Here <frontname> exists in <module-root-directory>/etc/frontend/routes.xml or <module-root-directory>/etc/adminhtml/routes.xml
- **/
-
-<?php
-namespace Ajindra\BookAppointment\Controller\Index;
- 
-use Magento\Framework\App\Action\Action;
-use Magento\Framework\App\Action\Context;
-use Ajindra\BookAppointment\Model\AvailableAppointmentFactory;
- 
-class Index extends Action
-{
-    /**
-     * @var \Ajindra\BookAppointment\Model\AvailableAppointmentFactory
-     */
-    protected $modelAvailableAppointmentFactory;
-    
-    /**
-     * @var \Magento\Framework\Escaper
-     */
-    protected $escaper;
- 
-    /**
-     * @param Context $context
-     * @param AvailableAppointmentFactory $modelAvailableAppointmentFactory
-     * @param \Magento\Framework\Escaper $escaper
-     */
-    public function __construct(
-        Context $context,
-        AvailableAppointmentFactory $modelAvailableAppointmentFactory,
-        \Magento\Framework\Escaper $escaper
-    ) {
-        parent::__construct($context);
-        $this->modelAvailableAppointmentFactory = $modelAvailableAppointmentFactory;
-        $this->escaper = $escaper;
-    }
- 
-    public function execute()
-    {
-        /**
-         * When Magento get your model, it will generate a Factory class
-         * for your model at var/generaton folder and we can get your
-         * model by this way
-         */
-        $availableAppointmentModel = $this->modelAvailableAppointmentFactory->create();
- 
-        // Load the item with ID is 1
-        $item = $availableAppointmentModel->load(1);
-        echo "<pre>";
-        var_dump($item->getData());
- 
-        // Get appointment_available collection
-        $availableAppointmentCollection = $availableAppointmentModel->getCollection();
-        // Load all data of collection
-        var_dump($availableAppointmentCollection->getData());
-        //above code must be removed
-        
-       
-        
-        /*** Start: Get users of a particular role in magento **************************************/
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-     
-        /**** Start: Get/Call Block function in Controller ****/ 
-        $layoutFactory = $objectManager->create('\Magento\Framework\View\Result\LayoutFactory');
-        $layout = $layoutFactory->create()->getLayout();
-        $block = $layout->createBlock('\Ajindra\BookAppointment\Block\BookAppointment');
-        if ($block) {
-            var_dump($block->getResult());
-        }
-        /**** End: Get/Call Block function in Controller ****/
-     
-        /**** Start: In .phtml/template file, we can access block function as follows **/
-        //Here in this section, $this & $block is pre-available variable in .phtml/template files
-        //echo $this->getResult(); //It is not phtml file that's why I have commented it
-        echo "<br>".$block->getResult(); //It is not phtml file that's why I have commented it
-        echo "<br>".$block->getLayout()->createBlock('\Ajindra\BookAppointment\Block\BookAppointment')->getResult(); 
-        //or
-        //echo "<br>".$this->getLayout()->createBlock('\Ajindra\BookAppointment\Block\BookAppointment')->getResult(); 
-        //It is not phtml file that's why I have commented the above line
-        //Through above line, you can get another block object & call their functions in .phtml/
-        //template file although this template is not mapped to this block in layout/.xml file
-        /**** Start: In .phtml/template file, we can access block function as follows **/
-     
-        /**** Start: Get response(page) build by block & view ****/ 
-        $pageFactory = $objectManager->create('\Magento\Framework\View\Result\PageFactory');
-        $page = $pageFactory->create();
-        //return $page;   //commented because it will result to return the response and 
-        //no processing would happen for remaining code
-        /**** End: Get response(page) build by block & view ****/
-     
-        // instance of the admin_role (in magento-2 the table name is 'authorization_role' )
-        //$model = Mage::getModel('admin/role');   (This line for magento-1 is equivalent to following line )
-        $model = $objectManager->create('\Magento\Authorization\Model\Role');
-        // fetch all roles with name of 'Partner', but get only the first item since two roles cannot have same name
-        $role = $model->getCollection()
-            ->addFieldToFilter('role_name', ['eq' => 'Partner'])
-            ->getFirstItem();
-        // check to make sure the role exists
-        if ($roleId = $role->getId())
-        {
-            // get a collection of all the user roles having the Staff role id as a parent_id
-            $staffUsers = $model->getCollection()
-                ->addFieldToFilter('parent_id', ['eq' => $roleId]);
-            // ensure the collection has size
-            if ($staffUsers->getSize())
-            {
-                // loop through each object and get the user_id values
-                foreach ($staffUsers as $staffUser)
-                {
-                    // you can still check to make sure the user_id field is not null
-                    if ($staffUser->getUserId())
-                    {
-                        // get the user object and do anything with it
-                        //In magento-1: Mage::getModel('admin/user') is equivalent to magento-2: $objectManager->create('\Magento\User\Model\User')
-                        $user = $objectManager->create('\Magento\User\Model\User')->load($staffUser->getUserId());
-                        $output[$user->getId()] = $user->getFirstName() . " " . $user->getLastName();
-                    }
-                }
-            }
-        }
-        var_dump($output);
-        /*** End: Get users of a particular role in magento **************************************/
-        
-        
-        
-        /*** Start: Get Guest orders ************************************************************/
-        $orderCollecion = $objectManager->create('\Magento\Sales\Model\ResourceModel\Order\CollectionFactory')
-            ->create()
-            ->addFieldToSelect('*');
-        $orderCollecion->addFieldToFilter(
-            'customer_id',
-            array(
-                'null' => true
-            )
-        );
-        $param = 10;
-        $orderCollecion->getSelect()->limit((int)$param);
-        
-        //var_dump($orderCollecion);
-        //Get data from object as an array as following
-        var_dump($orderCollecion->getData());
-        /*** End: Get Guest orders **************************************************************/
-        
-        /******** Start: Example of fetching data from table using from, where, etc keyword: ********/ 
-        //module-authorization\Model\ResourceModel\Role.php: getRoleUsers
-        /******** End: Example of fetching data from table using from, where, etc keyword: ********/
-        
-        
-        
-        /**** Start: Get Customer in Magento 2, Table: customer_entity  ************************/
-        echo "<br><br>=======================================================<br>Customer<br><br>";
-        $customer = $objectManager->create('\Magento\Customer\Model\CustomerFactory')->create();
-        $dataItem = $customer->getCollection()->getFirstItem();
-        echo "<br>".$dataItem->getId();
-        echo "<br>".$dataItem->getName();
-        echo "<br>".$dataItem->getEmail();
-        echo "<br>".$dataItem->getGender();
-        echo "<br>";
-        var_dump($dataItem->getDefaultBilling());
-        echo "<br>";
-        var_dump($dataItem->getDefaultShipping());
-        echo "<br>";
-        var_dump($customer->load(2)->getEmail());
-        echo "<br>";
-        var_dump($customer->load(2)->getData());
-        /**** End: Get Customer in Magento 2  ************************/
-        
-        
-        
-        /**** Start: Get Customer Address in Magento 2 Table: customer_address_entity ***********/
-        echo "<br><br>=======================================================<br>Customer Address<br><br>";
-        echo 'Jitendra';
-        $address = $objectManager->create('\Magento\Customer\Model\AddressFactory')->create();
-        echo "<br>";
-        var_dump($this->escaper->escapeHtml($address->load(2)->getCity()));
-        echo "<br>";
-        //var_dump($address->load(1)->getAttributes());
-        echo "<br>";
-        //var_dump($address->load(1)->getData());
-        //die();
-        $addressCollection = $address->getCollection();
-        $addressCollection->addFieldToFilter('parent_id', array('eq'=>3));
-        $addressCollection->getSelect();
-        var_dump($addressCollection->getData());
-        /**** End: Get Customer Address in Magento 2  ************************/
-        
-        
-        
-        /**** Start: Get Catalog Category in Magento 2 Table: catalog_category_entity ***********/
-        echo "<br><br>=======================================================<br>Catalog Category<br><br>";
-        $category = $objectManager->create('\Magento\Catalog\Model\CategoryFactory')->create();
-        $dataItem = $category->getCollection()->getFirstItem();
-        echo "<br>".$dataItem->getId();
-        echo "<br>".$dataItem->getPath();
-        
-        $categoryObj = $category->load(2);
-        echo "<br>".$categoryObj->getName();
-        echo "<br>";
-        $childCats = $categoryObj->getChildrenCategories();
-        var_dump($childCats->getData());
-        echo '<br>----------------------------------------<br>';
-        echo 'how to iterate collection object to get entity object like category, customer, product, etc.';
-        echo '<br>----------------------------------------<br>';
-        foreach ($childCats as $cat) {
-            echo "<br>".$cat->getName();
-        }
-        echo '<br>----------------------------------------<br>';        
-        echo "<br>";
-        var_dump($categoryObj->getCreatedAt());
-        echo "<br>";
-        var_dump($categoryObj->getData());
-        /**** End: Get Catalog Category in Magento 2 Table: catalog_category_entity  ************/
-        
-        
-        
-        /**** Start: Get Catalog Product in Magento 2 Table: catalog_product_entity ***********/
-        echo "<br><br>=======================================================<br>Catalog Product<br><br>";
-        $product = $objectManager->create('\Magento\Catalog\Model\ProductFactory')->create();
-        $dataItem = $product->getCollection()->getFirstItem();
-        echo "<br>".$dataItem->getId();
-        echo "<br>".$dataItem->getSku();
-        
-        $productObj = $product->load(2);
-        echo "<br>".$productObj->getName();
-        echo "<br>";
-        $productCats = $productObj->getCategoryCollection();
-        var_dump($productCats->getData());
-        echo '<br>----------------------------------------<br>';
-        echo 'how to iterate collection object to get entity object like category, customer, product, etc.';
-        echo '<br>----------------------------------------<br>';
-        foreach ($productCats as $cat) {
-            echo "<br>".$cat->getPath().' jky '.$cat->getName();
-        }
-        echo '<br>----------------------------------------<br>';        
-        echo "<br>";
-        var_dump($productObj->getCreatedAt());
-        echo "<br>";
-        //var_dump($productObj->getData());  //It is ok, but longer time to load, that's why commented
-        /**** End: Get Catalog Product in Magento 2 Table: catalog_product_entity  ************/
-        
-        
-        
-        /**** Start: Get Order in Magento 2 Table: sales_order ***********/
-        echo "<br><br>=======================================================<br>Sales Order<br><br>";
-        $order = $objectManager->create('\Magento\Sales\Model\OrderFactory')->create();
-        $dataItem = $order->getCollection()->getFirstItem();
-        echo "<br>".$dataItem->getId();
-        echo "<br>".$dataItem->getState();
-        
-        $orderObj = $order->load(3);
-        //echo "<br>".$orderObj->getName();
-        echo "<br>Partner ID: ";
-        var_dump($orderObj->getPartnerId());
-        echo "<br>";
-        var_dump($orderObj->getCreatedAt());
-        echo "<br>";
-        var_dump($orderObj->getData());
-        
-        //start: Get comment of an order
-        $order = $objectManager->create('\Magento\Sales\Model\OrderFactory')->create()->loadByIncrementId('000000003');
-        $history = $order->getStatusHistoryCollection()
-                    ->setOrder('created_at', 'desc')->getFirstItem();
-        $comment = $history->getComment();
-        //end: Get comment of an order
-        /**** End: Get Order in Magento 2 Table: sales_order  ************/
-        
-        
-        /*********** 
-        Start: Logging: Psr\Log\LoggerInterface mapped to Magento\Framework\Logger\Monolog 
-        that extends Monolog\Logger
-        ************/
-        /*$logger = $objectManager->create('Psr\Log\LoggerInterface');
-        //debug() logs to var/log/debug.log
-        $logger->debug('Jitendra Logging debug: '.date('Y-m-d H:i:s').' : This is debug log message');
-        //all following functions log to var/log/system.log
-        $logger->info('Jitendra Logging info: '.date('Y-m-d H:i:s').' : This is info log message');
-        $logger->notice('Jitendra Logging notice: '.date('Y-m-d H:i:s').' : This is notice log message');
-        $logger->warning('Jitendra Logging warning: '.date('Y-m-d H:i:s').' : This is warning log message');
-        $logger->error('Jitendra Logging error: '.date('Y-m-d H:i:s').' : This is error log message');
-        // method “critical” for logging exception from try-catch
-        // $this->_logger->critical($e);
-        // instance of $e will be converted to string (magic metod __toString() will be called).
-        $logger->critical('Jitendra Logging critical: '.date('Y-m-d H:i:s').' : This is critical log message');
-        $logger->alert('Jitendra Logging alert: '.date('Y-m-d H:i:s').' : This is alert log message');
-        $logger->emergency('Jitendra Logging emergency: '.date('Y-m-d H:i:s').' : This is emergency log message');*/
-        /*********** 
-        End: Logging: Psr\Log\LoggerInterface mapped to Magento\Framework\Logger\Monolog 
-        that extends Monolog\Logger
-        ************/
-        
-        
-        /**** Start: Get Invoice in Magento 2 Table: sales_invoice ***********/
-        echo "<br><br>=======================================================<br>Sales Invoice<br><br>";
-        // Not any separate InvoiceFactory class like OrderFactory
-        // Invoice related to order object
-        //Magento\Sales\Model\Order\Invoice
-        if ($orderObj->hasInvoices()) {
-            var_dump($orderObj->getInvoiceCollection());
-        }
-        
-        //start: Get invoice comment
-        $invoices = $order->getInvoiceCollection();
-        $invoice = $invoices->addFieldToFilter('increment_id', array('eq' => '000000003'))
-            ->getFirstItem();
-        
-        $commentInvoice = $invoice->getCommentsCollection()
-            ->setOrder('created_at', 'desc')
-            ->getFirstItem()
-            ->getComment();
-        //end: Get invoice comment
-        /**** End: Get Invoice in Magento 2 Table: sales_invoice  ************/
-        
-        
-        
-        /**** Start: Get Shipment in Magento 2 Table: sales_shipment ***********/
-        echo "<br><br>=======================================================<br>Sales Shipment<br><br>";
-        // Magento\Sales\Model\Order\ShipmentFactory but not like OrderFactory to create
-        // Shipment object. You would need to provide Order object to create Shipment object from ShipmentFactory
-        // Shipment related to order object
-        // Magento\Sales\Model\Order\Shipment
-        if ($orderObj->hasShipments()) {
-            var_dump($orderObj->getShipmentsCollection());
-            //other related functions - getShippingAmount(),getShippingCanceled(),getShippingDescription()
-            //getShippingDiscountAmount(), getShippingDiscountTaxCompensationAmount(), getShippingInclTax()
-            //getShippingInvoiced(), getShippingRefunded(), getShippingTaxAmount(), getShippingTaxRefunded()
-        }
-        
-        //start: Get shipment comment
-        $shipments = $order->getShipmentsCollection();
-        $shipment = $shipments->addFieldToFilter('increment_id', array('eq' => '000000003'))
-            ->getFirstItem();
-        
-        $commentsShipment = $shipment->getCommentsCollection()
-            ->setOrder('created_at', 'desc')
-            ->getFirstItem()
-            ->getComment();
-        //end: Get shipment comment
-        /**** End: Get Shipment in Magento 2 Table: sales_shipment  ************/
-        
-        
-        
-        /**** Start: Get Creditmemo in Magento 2 Table: sales_creditmemo ***********/
-        echo "<br><br>=======================================================<br>Sales Creditmemo<br><br>";
-        // Magento\Sales\Model\Order\CreditmemoFactory but not like OrderFactory to create
-        // Creditmemo object. You would need to provide Order object to create Creditmemo object from CreditmemoFactory
-        // Creditmemo related to order object
-        // Magento\Sales\Model\Order\Creditmemo
-        if ($orderObj->hasCreditmemos()) {
-            var_dump($orderObj->getCreditmemosCollection());
-        }
-        
-        //start: Get credit-memos comment
-        $creditMemos = $order->getCreditmemosCollection();
-        $creditMemo = $creditMemos->addFieldToFilter('increment_id', array('eq' => '000000002'))
-            ->getFirstItem();
-        
-        $commentCreditMemo = $creditMemo->getCommentsCollection()
-            ->setOrder('created_at', 'desc')
-            ->getFirstItem()
-            ->getComment();
-        //end: Get credit-memos comment
-        /**** End: Get CreditMemo in Magento 2 Table: sales_creditmemo  ************/
-    }
-}
+   1. Download Magento 2.2.6 (zip with sample-data) from "https://magento.com/tech-resources/download".
+   2. Create a blank-directory mgwd226 and unzip downloaded zip file into this directory mgwd226; might be using 
+      command:
+         unzip ~/Downloads/Magento-CE-2.2.6_sample_data-2018-09-07-02-28-42.zip -d mgwd226/
+   3. Skip this step-3 as this is only for your information/knowledge:
+         Here we see vendor directory is available with all dependencies as mentioned in composer.json, so need 
+	 not of use "composer install" command. If still we run/fire command "composer install", we instantly got 
+	 message: No need of update/install, autoload file created.
+         Let backup of vendor/.htaccess file and delete the whole vendor directory.
+         Again create a blank vendor directory and put here backed-up file .htaccess.
+         If we run command "composer install" now, composer downloads/installs all 
+	 dependencies(i.e. libraries/packages) inside vendor directory as mentioned in composer.lock(or composer.json; 
+	 remember "composer install" command always look for composer.lockfile first, if not available then look 
+	 into composer.json).
+   4. Run exactly the same command as above(only changed currency from "INR" to "USD"), used to install 
+      Magento 2.2.6 without sample data i.e.:
+         php bin/magento setup:install --backend-frontname=admin --db-host=localhost --db-name=magento_7121tt --db-user=root --base-url=http://mg226tt.local.com --admin-user=admin --admin-password=admin@123 --admin-email=goto.jitendra@gmail.com --admin-firstname=Jitendra --admin-lastname=Yadav --language=en_US --timezone=Asia/Kolkata --currency=USD --use-rewrites=1
+   5. In 15-20 minutes, we get successful installation message. It's done.
