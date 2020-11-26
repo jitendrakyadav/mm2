@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<!--
+ * Ajindra : Create a simple HelloWorld frontend page, involving layout, block 
+ * and template file as well
+ *
+ * @category   Ajindra_FrontendHelloWorldPage
+ * @package    Ajindra_FrontendHelloWorldPage
+ * @copyright  2020 All rights reserved.
+ * @license    Proprietary
+ * @author     Ajindra
+ * 
+ * Note: It's secondary mandatory file needed to create a module after registration.php 
+ * Here we mention module name as <vendorName>_<actualModuleName> and module release version
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Ajindra_FrontendHelloWorldPage" setup_version="1.0.0">
+    </module>
+</config>

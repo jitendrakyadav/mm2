@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!--
+ * Ajindra : Create a simple HelloWorld frontend page, involving layout, block 
+ * and template file as well
+ *
+ * @category   Ajindra_FrontendHelloWorldPage
+ * @package    Ajindra_FrontendHelloWorldPage
+ * @copyright  2020 All rights reserved.
+ * @license    Proprietary
+ * @author     Ajindra
+ * 
+ * Note: 
+ * 1. The current XML file is called layout file. It defines the page structure and locate in 
+ * <module-root-directory>/view/<area>/layout/
+ * Here <area> denotes either "frontend" or "adminhtml" i.e. whether this layout 
+ * xml file is written to applied for either any frontend page or any admin page.
+ *
+ * 2. There is a special layout file name default.xml which will be applied for all 
+ * the pages in it’s area i.e. either for all frontend pages or admin pages created 
+ * under this module. Otherwhile, the layout file will have name as format:
+ * <router_id as mentioned in routes.xml as in current module like "helloworld">_<controller_name>_<action_name>.xml
+ * As current layout file name is: helloworld_index_samplefrontendpage.xml
+ *
+ * 3. When rendering page, Magento2 will check the layout file to decide how to display the page. 
+ * Then it loads corresponding Block and Template and hence web-page is displayed. 
+ * As here in current layout xml files, there clearly has been mentioned under <block> tag that 
+ * every logical data needed in samplefrontendpage.phtml template file will be provided by SampleFrontendPage block.
+ * Although, in any template file, you can access other blocks as well if you needed.
+ *
+ * 4. Here both block and template file created under Index/index directory that denotes that 
+ * these block & template would be used for Index (in actual, a directory name) Controller.
+ * 
+ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <referenceContainer name="content">
+        <block class="Ajindra\FrontendHelloWorldPage\Block\Index\SampleFrontendPage" name="helloworld_index_samplefrontendpage" template="Ajindra_FrontendHelloWorldPage::index/samplefrontendpage.phtml" />
+    </referenceContainer>
+</page>
