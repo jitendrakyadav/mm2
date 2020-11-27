@@ -13,7 +13,7 @@
  * <vendorName>_<moduleName>
  */
 \Magento\Framework\Component\ComponentRegistrar::register(
-	\Magento\Framework\Component\ComponentRegistrar::MODULE,
-	'Ajindra_FrontendHelloWorldPage',
-	__DIR__
+    \Magento\Framework\Component\ComponentRegistrar::MODULE,
+    'Ajindra_FrontendHelloWorldPage',
+    __DIR__
 );

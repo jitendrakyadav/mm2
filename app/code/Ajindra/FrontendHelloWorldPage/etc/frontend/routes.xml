@@ -10,7 +10,7 @@
  * @author     Ajindra
  * 
  * Note: 
- * 1. Here we tell to Magento2, what route-name we want (i.e. which will be used 
+ * 1. Here we tell to Magento2, what route-name we want (which will be used 
  * in URL just after domain-name like http://mg234.local.com/helloworld as here 
  * to display all pages developed under this module)
  *
@@ -20,6 +20,10 @@
  * 3. A particular frontend page url, related with a module, builds as following:
  * <protocol>://<domain-name>/<module-front-name-as-mentioned-in-routes.xml>/<controller-name>/<action-name>
  * http://mg234.local.com/helloworld/index/samplefrontendpage
+ *
+ * 4. If Controller name is "Index" as in current module and action name is also "Index"
+ * then we can access the corresponding web-page using following URL as well:
+ * http://mg234.local.com/helloworld 
  * 
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">

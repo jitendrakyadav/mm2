@@ -16,8 +16,8 @@
  * 
  * 2. Remember, here an action denotes a separate independent web-page.
  * 
- * 3. Here execute() method is control execution starting point after __construct() 
- * method i.e. constructor.
+ * 3. Here, in this file, execute() method is control execution starting point 
+ * after __construct() method i.e. constructor.
  */
 namespace Ajindra\FrontendHelloWorldPage\Controller\Index;
 

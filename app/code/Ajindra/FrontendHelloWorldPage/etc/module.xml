@@ -9,7 +9,7 @@
  * @license    Proprietary
  * @author     Ajindra
  * 
- * Note: It's secondary mandatory file needed to create a module after registration.php 
+ * Note: It's second mandatory file needed to create a module after registration.php 
  * Here we mention module name as <vendorName>_<actualModuleName> and module release version
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
