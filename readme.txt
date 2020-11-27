@@ -23,7 +23,7 @@
  6. If theme is not working/applying properly on developed frontend hello world webpage, then again use command:
     php bin/magento setup:static-content:deploy -f
 
- How our developed frontend hello world web-page looks like, please view following print-screen:
+ How our developed frontend hello world web-page looks like, please look following print-screen:
  print-screen-frontend-hello-world-page.png
 
 
