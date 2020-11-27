@@ -39,17 +39,16 @@
 	                csv_files_and_import_images_demo_printscreens/images_with_hierarchical_directory_structure.csv 
 	             using the field "Select File to Import"
 	          i. Set "Images File Directory" as "pub/media/import" i.e. the relative path from your project's 
-		     root directory where you have kept your images to import
-	          j. The page would be shown as 
+		     root directory where you have kept your images to import. Now the page would look like as below:
 		        csv_files_and_import_images_demo_printscreens/import-images-from-local-server.jpg
-	          k. Click on button "Check Data" in header
-	          l. If all ok, "Import" button would appear in footer as following, click on that. 
+	          j. Click on button "Check Data" in header.
+	          k. If all ok, "Import" button would appear in footer as following, click on that. 
 		        csv_files_and_import_images_demo_printscreens/csv-file-data-verified.jpg 
-	          m. Then you will get success message as following:
+	          l. Then you will get success message as following:
 		        csv_files_and_import_images_demo_printscreens/csv-file-import-successful.jpg 
 	             It's done: 
 		        csv_files_and_import_images_demo_printscreens/product-images-after-import.jpg
-	          n. Look on images: 
+	          m. Look on images: 
 		        csv_files_and_import_images_demo_printscreens/product-images-before-import.jpg 
 			& 
 	                csv_files_and_import_images_demo_printscreens/product-images-after-import.jpg => The new 
@@ -64,7 +63,7 @@
 	    2. Keep "Images File Directory" field blank in import-product-webform as we have already mentioned 
 	       each-image full path with it's domain-name in 
 	          csv_files_and_import_images_demo_printscreens/catalog_product_2.csv 
-	       look print-screen 
+	       Look print-screen: 
 	          csv_files_and_import_images_demo_printscreens/import-images-from-external-server.jpg
          Note: Actually, what does Magento do in this approach-2 ? 
 	       Magento downloads all images from external-server to it's pub/media/import directory and then follows 
